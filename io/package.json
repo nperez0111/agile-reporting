@@ -1,0 +1,17 @@
+{
+  "name": "io",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "inquirer": "7.0.4",
+    "load-json-file": "6.2.0",
+    "write-json-file": "4.3.0"
+  }
+}
