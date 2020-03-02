@@ -11,7 +11,7 @@ const puppeteer = require('puppeteer');
 async function getImage() {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
-    await page.goto('https://www.chartjs.org/');
+    await page.goto('http://nickthesick.duckdns.org/');
     /**
      * This is just an example, we are not just going to take a screenshot of the page
      * You will need to look into: https://www.chartjs.org/docs/latest/developers/api.html#tobase64image
