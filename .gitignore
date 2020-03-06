@@ -2,3 +2,4 @@ node_modules/
 io/node_modules/
 chart/node_modules/
 output/node_modules/
+.DS_Store
