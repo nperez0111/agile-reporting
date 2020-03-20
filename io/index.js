@@ -2,7 +2,6 @@ const loadJson = require('load-json-file')
 const writeJson = require('write-json-file')
 const inquirer = require('inquirer')
 
-
 // Make a special key that shows current values
 /**
  * We will use this sort of as our `public static void main` from java.
@@ -119,23 +118,3 @@ if(!module.parent){
  * where DataPoint: {value: Number, label: Date}
  **/ 
 module.exports=retrieveGraphData;
-
-/**
- * Other questinos include the actual format of the file, if this is
- * how it should look.
- * 
- * Are there any other forms of input I should worry about or any
- * other validations that may be needed.
- * 
- * Should the user be restricted in terms of what date they put in?
- * 
- * Should there be any other confirmations?
- * 
- * Should user have to go through a prompt to put in a date
- *  i.e: "Choose a year?" then "CHoose a month" and have these be chosen
- * by a static list provided by the program. It seems as if inquirer.js
- * can provide this functionality.
- * 
- * Confirmation to let user know they are about to insert "this" datapoint
- * for "this" hospital?
- */
