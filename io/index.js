@@ -2,6 +2,8 @@ const loadJson = require('load-json-file')
 const writeJson = require('write-json-file')
 const inquirer = require('inquirer')
 
+
+// Make a special key that shows current values
 /**
  * We will use this sort of as our `public static void main` from java.
  * JavaScript is a very loose language so you kind of have to come up with your own patterns for things
@@ -25,12 +27,20 @@ async function retrieveGraphData(){
  * json data
  */
 function getNewDataPoint(){
-  // A draft a questions
+  // A draft of questions
+  var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"]
   var questions = [
     {
-      type: 'number',
+      type: 'input',
       name: 'value',
-      message: "What is the next value?"
+      message: "What is the next value?", 
+	  validate: function(value) {
+		  if (parseFloat(value) > 0 && parseFloat(value) < 1) {
+			return true;
+		}
+
+		return 'Please enter a value between 0 and 1'
+	  }
       // A validation will be needed here to ensure this value is a
       // float between 0 and 1
     },
@@ -41,8 +51,26 @@ function getNewDataPoint(){
       default: function() {
         // I need to adjust this to local time
         var today = new Date();
-        return today.toString();
-      }
+		// Year may be important?
+        var month = monthNames[today.getUTCMonth()]
+	    var day = today.getUTCDay()
+
+
+        return month + " " + day;
+	  },
+	  validate: function(value) {
+		var split = value.split(" ");
+	    if (!monthNames.includes(split[0])) {
+	      return "Choose a month in: " + monthNames.join(", ");
+		} else {
+			if (split[1] < 0 || split[1] > 31) {
+				return "Choose a day between 1 and 31";
+			} else {
+				return true;
+			}
+		}
+		
+	  }
       // Before putting in the logic to read a date from user, I want to
       // ensure this is a good approach to issue
     }
