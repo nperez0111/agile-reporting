@@ -27,14 +27,14 @@ async function retrieveGraphData(){
  */
 function getNewDataPoint(){
   // A draft of questions
-  var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"]
+  var monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUNE", "JULY", "AUG", "SEP", "OCT", "NOV", "DEC"];
   var questions = [
     {
       type: 'input',
       name: 'value',
       message: "What is the next value?", 
 	  validate: function(value) {
-		  if (parseFloat(value) > 0 && parseFloat(value) < 1) {
+		  if (parseFloat(value.trim()) > 0 && parseFloat(value.trim()) < 1) {
 			return true;
 		}
 
@@ -59,10 +59,11 @@ function getNewDataPoint(){
 	  },
 	  validate: function(value) {
 		var split = value.split(" ");
-	    if (!monthNames.includes(split[0])) {
+		if (!monthNames.includes(split[0].trim().toUpperCase())) {
 	      return "Choose a month in: " + monthNames.join(", ");
 		} else {
-			if (split[1] < 0 || split[1] > 31) {
+			day_input = parseInt(split[1].trim());
+			if (isNaN(day_input) || day_input < 0 || day_input > 31) {
 				return "Choose a day between 1 and 31";
 			} else {
 				return true;
