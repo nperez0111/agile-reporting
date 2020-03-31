@@ -40,44 +40,30 @@ function getNewDataPoint(){
 
 		return 'Please enter a value between 0 and 1'
 	  }
-      // A validation will be needed here to ensure this value is a
-      // float between 0 and 1
     },
-    {
+	{
+	   	type: 'list',
+		name: 'month',
+		message: 'Please enter the month: ',
+		choices: monthNames
+	},
+	{
       type: 'input',
-      name: 'label',
-      message: "What is the label for this (next) value?",
-      default: function() {
-        // I need to adjust this to local time
-        var today = new Date();
-		// Year may be important?
-        var month = monthNames[today.getUTCMonth()]
-	    var day = today.getUTCDay()
-
-
-        return month + " " + day;
-	  },
+      name: 'day',
+      message: "Please enter the day of the month: ",
 	  validate: function(value) {
-		var split = value.split(" ");
-		if (!monthNames.includes(split[0].trim().toUpperCase())) {
-	      return "Choose a month in: " + monthNames.join(", ");
+		day_input = parseInt(value.trim());
+		if (isNaN(day_input) || day_input < 1 || day_input > 31) {
+			return "Choose a day between 1 and 31";
 		} else {
-			day_input = parseInt(split[1].trim());
-			if (isNaN(day_input) || day_input < 0 || day_input > 31) {
-				return "Choose a day between 1 and 31";
-			} else {
-				return true;
-			}
+			return true;
 		}
 		
 	  }
-      // Before putting in the logic to read a date from user, I want to
-      // ensure this is a good approach to issue
-    }
-  ];
+	}
+	];
 
   inquirer.prompt(questions).then(answers => {
-    // console.log(JSON.stringify(answers, null, '  '));
     addNewDataPoint(answers);
   });
 }
@@ -87,10 +73,11 @@ function getNewDataPoint(){
  * what the current JSON file looks like
  */
 async function addNewDataPoint(newDataPoint){
+  refinedDataPoint = {value:parseFloat(newDataPoint.value), label:newDataPoint.month + " "  + newDataPoint.day};
   const {numberOfDataPoints, dataPoints} = await loadJson('./data.json');
-  dataPoints.push(newDataPoint)
+  dataPoints.push(refinedDataPoint);
 
-  writeJson('./data_test.json', {numberOfDataPoints: dataPoints.length, dataPoints: dataPoints});
+  writeJson('./data.json', {numberOfDataPoints: dataPoints.length, dataPoints: dataPoints});
 }
 
 
