@@ -13,6 +13,7 @@ const inquirer = require('inquirer')
  */
 async function retrieveGraphData(){
 
+  getNewDataPoint();
   const {numberOfDataPoints, dataPoints} = await loadJson('./data.json');
   console.log('numberOfDataPoints', numberOfDataPoints);
   console.log('dataPoints', dataPoints);
