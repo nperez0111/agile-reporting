@@ -12,11 +12,10 @@ const inquirer = require('inquirer')
  * notice that I'm using an async function because we will be doing a lot of asynchronous actions 
  */
 async function retrieveGraphData(){
-
-  getNewDataPoint();
   const {numberOfDataPoints, dataPoints} = await loadJson('./data.json');
   console.log('numberOfDataPoints', numberOfDataPoints);
   console.log('dataPoints', dataPoints);
+  await getNewDataPoint();
 
   return dataPoints;
 }
@@ -26,7 +25,7 @@ async function retrieveGraphData(){
  * Function that allows usr to add new data points to current
  * json data
  */
-function getNewDataPoint(){
+async function getNewDataPoint(){
   // A draft of questions
   var monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUNE", "JULY", "AUG", "SEP", "OCT", "NOV", "DEC"];
   var questions = [
@@ -95,7 +94,8 @@ if(!module.parent){
   */
 
   // Just for testing
-  getNewDataPoint();
+  // getNewDataPoint();
+  retrieveGraphData();
 }
 
 /**

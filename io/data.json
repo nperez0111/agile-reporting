@@ -1,19 +1,6 @@
 {
-	"numberOfDataPoints": 6,
+	"numberOfDataPoints": 5,
 	"dataPoints": [
-		{
-			"value": 0.54,
-			"label": "Thu Feb 27 2020 21:32:39 GMT-0800 (Pacific Standard Time)"
-		},
-		{
-			"value": ".5",
-			"label": "MAR 2",
-			"Month": "AUG"
-		},
-		{
-			"value": ".5",
-			"label": "MAR 17"
-		},
 		{
 			"value": 0.152,
 			"label": "OCT 21"
@@ -25,6 +12,14 @@
 		{
 			"value": 0.5,
 			"label": "JULY 20"
+		},
+		{
+			"value": 0.5,
+			"label": "APR 17"
+		},
+		{
+			"value": 0.1,
+			"label": "APR 26"
 		}
 	]
 }
