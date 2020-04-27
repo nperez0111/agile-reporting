@@ -1,5 +1,5 @@
 {
-	"numberOfDataPoints": 5,
+	"numberOfDataPoints": 27,
 	"dataPoints": [
 		{
 			"value": 0.152,
@@ -20,6 +20,94 @@
 		{
 			"value": 0.1,
 			"label": "APR 26"
+		},
+		{
+			"value": 0.7,
+			"label": "DEC 21"
+		},
+		{
+			"value": 0.8,
+			"label": "MAR 27"
+		},
+		{
+			"value": 0.9,
+			"label": "FEB 9"
+		},
+		{
+			"value": 0.66,
+			"label": "JAN 8"
+		},
+		{
+			"value": 0.5,
+			"label": "JAN 5"
+		},
+		{
+			"value": 0.5,
+			"label": "JAN 5"
+		},
+		{
+			"value": 0.8,
+			"label": "JAN 15"
+		},
+		{
+			"value": 0.9,
+			"label": "JAN 5"
+		},
+		{
+			"value": 0.99,
+			"label": "NOV 24"
+		},
+		{
+			"value": 0.9,
+			"label": "JAN 2"
+		},
+		{
+			"value": 0.98,
+			"label": "JAN 3"
+		},
+		{
+			"value": 0.97,
+			"label": "JAN 4"
+		},
+		{
+			"value": 0.96,
+			"label": "MAR 5"
+		},
+		{
+			"value": 0.95,
+			"label": "JAN 6"
+		},
+		{
+			"value": 0.94,
+			"label": "JAN 7"
+		},
+		{
+			"value": 0.93,
+			"label": "JAN 8"
+		},
+		{
+			"value": 0.92,
+			"label": "JAN 9"
+		},
+		{
+			"value": 0.91,
+			"label": "JAN 10"
+		},
+		{
+			"value": 0.9,
+			"label": "JAN 11"
+		},
+		{
+			"value": 0.89,
+			"label": "JAN 12"
+		},
+		{
+			"value": 0.88,
+			"label": "JAN 13"
+		},
+		{
+			"value": 0.87,
+			"label": "JAN 14"
 		}
 	]
 }
