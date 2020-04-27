@@ -2,6 +2,7 @@ const loadJson = require('load-json-file')
 const writeJson = require('write-json-file')
 const inquirer = require('inquirer')
 
+// Make a special key that shows current values
 /**
  * We will use this sort of as our `public static void main` from java.
  * JavaScript is a very loose language so you kind of have to come up with your own patterns for things
@@ -10,13 +11,87 @@ const inquirer = require('inquirer')
  * so this function should return that data to them.
  * notice that I'm using an async function because we will be doing a lot of asynchronous actions 
  */
-async function retrieveGraphData(){
+async function retrieveGraphData() {
 
-  const {numberOfDataPoints, dataPoints} = await loadJson('./data.json');
-  console.log('numberOfDataPoints', numberOfDataPoints);
-  console.log('dataPoints', dataPoints);
-  
-  return dataPoints;
+	await getNewDataPoint();
+	const {numberOfDataPoints, dataPoints} = await loadJson('./data.json');
+	console.log("\nUpdated Data:");
+	console.log('numberOfDataPoints', numberOfDataPoints);
+	console.log('dataPoints', dataPoints);
+	return dataPoints;
+
+}
+
+
+/**
+ * Function that allows usr to add new data points to current
+ * json data
+ */
+async function getNewDataPoint() {
+	// A draft of questions
+	const {numberOfDataPoints, dataPoints} = await loadJson('./data.json');
+	console.log("Current Data:");
+	console.log('numberOfDataPoints', numberOfDataPoints);
+	console.log('dataPoints', dataPoints);
+	var monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUNE", "JULY", "AUG", "SEP", "OCT", "NOV", "DEC"];
+	var questions = [
+		{
+			type: 'input',
+			name: 'value',
+			message: "What is the next value?", 
+			validate: function(value) {
+				if (parseFloat(value.trim()) > 0 && parseFloat(value.trim()) < 1) {
+					return true;
+				}
+
+				return 'Please enter a value between 0 and 1'
+			}
+		},
+		{
+			type: 'list',
+			name: 'month',
+			message: 'Please enter the month: ',
+			choices: monthNames
+		},
+		{
+			type: 'input',
+			name: 'day',
+			message: "Please enter the day of the month: ",
+			validate: function(value) {
+				day_input = parseInt(value.trim());
+				if (isNaN(day_input) || day_input < 1 || day_input > 31) {
+					return "Choose a day between 1 and 31";
+				} else {
+					return true;
+				}
+
+			}
+		}
+	];
+
+	temp_answers = null;
+	const getInquirer = await inquirer.prompt(questions).then(answers => {
+		temp_answers = answers;	
+	});
+	await addNewDataPoint(temp_answers);
+}
+
+/**
+ * This is my idea of adding a new datapoint to the set based on
+ * what the current JSON file looks like
+ */
+async function addNewDataPoint(newDataPoint){
+	refinedDataPoint = {value:parseFloat(newDataPoint.value), label:newDataPoint.month + " "  + newDataPoint.day};
+	const {numberOfDataPoints, dataPoints} = await loadJson('./data.json');
+	dataPoints.push(refinedDataPoint);
+	await writeJson('./data.json', {numberOfDataPoints: dataPoints.length, dataPoints: dataPoints});
+
+
+	/*
+	const result = await writeJson('./data.json', {numberOfDataPoints: dataPoints.length, dataPoints: dataPoints}).then(dataReturned => {
+		return dataReturned;
+	});
+	*/
 }
 
 
@@ -25,10 +100,15 @@ async function retrieveGraphData(){
  * `node index.js` it will automatically call this function and execute it
  */
 if(!module.parent){
-  retrieveGraphData().then(dataReturned => {
-    console.log('The data returned:');
-    console.log(dataReturned)
-  });
+	/*
+	retrieveGraphData().then(dataReturned => {
+		console.log('dataReturned', dataReturned);
+	});
+	*/
+
+	// Just for testing
+	// getNewDataPoint();
+	retrieveGraphData();
 }
 
 /**
