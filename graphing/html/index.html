@@ -11,7 +11,13 @@
     <script>
         fetch('/data').then(d => d.json()).then(data => {
             // From inside of here data will have the data loaded from the server
-            console.log(data);
+
+            data.then(datareturned =>{
+              for(let i = 0; i < datareturned.length; i++){
+                console.log(datareturned[i].value);
+              }
+            });
+
 
 
             const ctx = document.getElementById('graph').getContext('2d');

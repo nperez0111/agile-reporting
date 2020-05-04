@@ -11,6 +11,9 @@
   "license": "ISC",
   "dependencies": {
     "express": "4.17.1",
-    "nodemon": "2.0.2"
+    "nodemon": "2.0.2",
+    "inquirer": "7.0.4",
+    "load-json-file": "6.2.0",
+    "write-json-file": "4.3.0"
   }
 }
