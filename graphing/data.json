@@ -1,0 +1,25 @@
+{
+	"numberOfDataPoints": 5,
+	"dataPoints": [
+		{
+			"value": ".5",
+			"label": "MAR 17"
+		},
+		{
+			"value": 0.152,
+			"label": "OCT 21"
+		},
+		{
+			"value": 0.5,
+			"label": "SEP 31"
+		},
+		{
+			"value": 0.5,
+			"label": "JULY 20"
+		},
+		{
+			"value": 0.4,
+			"label": "MAR 2"
+		}
+	]
+}

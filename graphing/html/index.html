@@ -3,6 +3,7 @@
 
 <head>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js" integrity="sha256-R4pqcOYV8lt7snxMQO/HSbVCFRPMdrhAFMH+vr9giYI=" crossorigin="anonymous"></script>
+    <script src="https://cdn.rawgit.com/chartjs/chartjs-plugin-annotation/master/chartjs-plugin-annotation.min.js"></script>
 </head>
 
 <body>
@@ -10,48 +11,128 @@
     <script>
         fetch('/data').then(d => d.json()).then(data => {
             // From inside of here data will have the data loaded from the server
-            console.log(data)
+
+            data.then(datareturned =>{
+              for(let i = 0; i < datareturned.length; i++){
+                console.log(datareturned[i].value);
+              }
+            });
 
 
-            /**
-             * I just copy pasted ChartJS example from there website.
-             * From here you will just be concerned with rendering the chart to be similar to the one we already have
-             **/
 
             const ctx = document.getElementById('graph').getContext('2d');
+            // Chart.pluginService.register({
+            //     afterDraw: function(chart) {
+            //         if (typeof chart.config.options.lineAt != 'undefined') {
+            //             var lineAt = chart.config.options.lineAt;
+            //             var ctxPlugin = chart.chart.ctx;
+            //             var xAxe = chart.scales[chart.config.options.scales.xAxes[0].id];
+            //             var yAxe = chart.scales[chart.config.options.scales.yAxes[0].id];
+            //
+            //
+            //             if(yAxe.min != 0) return;
+            //
+            //             ctxPlugin.strokeStyle = "grey";
+            //             ctxPlugin.beginPath();
+            //             lineAt = (lineAt - yAxe.min) * (100 / yAxe.max);
+            //             lineAt = (100 - lineAt) / 100 * (yAxe.height) + yAxe.top;
+            //             ctxPlugin.moveTo(xAxe.left, lineAt);
+            //             ctxPlugin.lineTo(xAxe.right, lineAt);
+            //             ctxPlugin.stroke();
+            //         }
+            //     }
+            // });
             const myChart = new Chart(ctx, {
-                type: 'bar',
+                type: 'line',
                 data: {
-                    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                    labels: ['1', '2', '3', '4', '5', '6', '7','8', '9', '10', '11','12'],
                     datasets: [{
-                        label: '# of Votes',
-                        data: [12, 19, 3, 5, 2, 3],
+                        label: false,
+                        data: [0.6, 0.75, 0.4, 0.65, 0.9, 1.1, 0.78, 1.5, 1.05, 0.4, 0.8, 0.6],
+                        lineTension: 0,
+                        borderColor: 'rgb(128,23,25)',
+                        fill: false,
                         backgroundColor: [
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(255, 206, 86, 0.2)',
-                            'rgba(75, 192, 192, 0.2)',
-                            'rgba(153, 102, 255, 0.2)',
-                            'rgba(255, 159, 64, 0.2)'
+                            //'rgba(255, 99, 132, 0.2)',
+                            // 'rgba(54, 162, 235, 0.2)',
+                            //'rgba(255, 206, 86, 0.2)',
+                             'rgba(75, 192, 192, 0.2)',
+                            // 'rgba(153, 102, 255, 0.2)',
+                            // 'rgba(255, 159, 64, 0.2)'
                         ],
-                        borderColor: [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)',
-                            'rgba(255, 159, 64, 1)'
-                        ],
-                        borderWidth: 1
+                        borderWidth: 5
                     }]
                 },
                 options: {
+                    legend: {
+                        display: false,
+                    },
+                    title: {
+                        display: true,
+                        text: 'Median time to first view after first sustained eCART elevation, hrs'
+                    },
+                    lineAt: 1,
+                    elements: {
+                        point:{
+                            radius: 0
+                        }
+                    },
+                    annotation: {
+                        annotations: [{
+                            type: 'box',
+                            drawTime: 'beforeDatasetsDraw',
+                            id: 'region-1',
+                            xScaleID: 'x-axis-0',
+                            yScaleID: 'y-axis-0',
+                            xMin: '1',
+                            xMax: '12',
+                            yMin: 0.5,
+                            yMax: 1,
+                            backgroundColor: 'rgba(8,250,10,0.5)'
+                        },
+                            {
+                                type: 'box',
+                                drawTime: 'beforeDatasetsDraw',
+                                id: 'region-2',
+                                xScaleID: 'x-axis-0',
+                                yScaleID: 'y-axis-0',
+                                xMin: '1',
+                                xMax: '12',
+                                yMin: 1,
+                                yMax: 1.5,
+                                backgroundColor: 'rgba(148,250,127,0.5)',
+                            }]
+                    },
                     scales: {
                         yAxes: [{
+                            scaleLabel:{
+                                display: true,
+                                labelString: 'Time,Hours'
+                            },
+                            gridLines:{
+                                display: true
+                            },
                             ticks: {
-                                beginAtZero: true
+                                suggestedMax: 2,
+                                minTicksLimit: 6,
+                                maxTicksLimit: 6,
+                                beginAtZero: true,
                             }
-                        }]
+                        }],
+                        xAxes: [{
+                            offset: true,
+                            display: true,
+                            gridLines:{
+                                display: true
+                            },
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Time to View'
+                            },
+                            ticks: {
+                                beginAtZero: false
+                            }
+                        }],
                     }
                 }
             });
