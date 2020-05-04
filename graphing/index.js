@@ -1,29 +1,16 @@
-const express = require("express");
+const express = require('express');
+
 const app = express();
-const data  = require('./dataGen');
 
-app.use('/data',(req,res)=>{
-  /**
-   * This is the route that you will use to actually retrieve the data that you need.
-   * 
-   * Will eventually use `/io` to get the data but for now it is okay to just use an array here directly
-   */
-  // Read Data.json file and send it to front end
+module.exports = (dataPoints, settings) => {
+  app.use('/data', async (_, res) => res.json(dataPoints));
 
-  // data().then(datareturned =>{
-  //   for(let i = 0; i < datareturned.length; i++){
-  //     console.log(datareturned[i].value);
-  //   }
-  // });
+  app.use('/settings', async (_, res) => res.json(settings));
 
-console.log(res.json());
+  app.use(express.static(`${__dirname}/html`));
 
-  return data();
-});
-
-app.use(express.static(__dirname + '/html'));
-
-app.listen(3000, () => {
-  console.log('app listening on port 3000!');
-  console.log('go to: http://localhost:3000/ in your browser')
-});
+  return new Promise((resolve) => {
+    console.log('called');
+    const server = app.listen(3000, () => console.log('listening') || resolve(server));
+  });
+};

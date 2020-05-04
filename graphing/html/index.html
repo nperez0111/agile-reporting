@@ -12,43 +12,14 @@
         fetch('/data').then(d => d.json()).then(data => {
             // From inside of here data will have the data loaded from the server
 
-            data.then(datareturned =>{
-              for(let i = 0; i < datareturned.length; i++){
-                console.log(datareturned[i].value);
-              }
-            });
-
-
-
             const ctx = document.getElementById('graph').getContext('2d');
-            // Chart.pluginService.register({
-            //     afterDraw: function(chart) {
-            //         if (typeof chart.config.options.lineAt != 'undefined') {
-            //             var lineAt = chart.config.options.lineAt;
-            //             var ctxPlugin = chart.chart.ctx;
-            //             var xAxe = chart.scales[chart.config.options.scales.xAxes[0].id];
-            //             var yAxe = chart.scales[chart.config.options.scales.yAxes[0].id];
-            //
-            //
-            //             if(yAxe.min != 0) return;
-            //
-            //             ctxPlugin.strokeStyle = "grey";
-            //             ctxPlugin.beginPath();
-            //             lineAt = (lineAt - yAxe.min) * (100 / yAxe.max);
-            //             lineAt = (100 - lineAt) / 100 * (yAxe.height) + yAxe.top;
-            //             ctxPlugin.moveTo(xAxe.left, lineAt);
-            //             ctxPlugin.lineTo(xAxe.right, lineAt);
-            //             ctxPlugin.stroke();
-            //         }
-            //     }
-            // });
             const myChart = new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: ['1', '2', '3', '4', '5', '6', '7','8', '9', '10', '11','12'],
+                    labels: data.map(d=>d.label),
                     datasets: [{
                         label: false,
-                        data: [0.6, 0.75, 0.4, 0.65, 0.9, 1.1, 0.78, 1.5, 1.05, 0.4, 0.8, 0.6],
+                        data: data.map(d=>d.value),
                         lineTension: 0,
                         borderColor: 'rgb(128,23,25)',
                         fill: false,
@@ -84,10 +55,10 @@
                             id: 'region-1',
                             xScaleID: 'x-axis-0',
                             yScaleID: 'y-axis-0',
-                            xMin: '1',
+                            xMin: '0',
                             xMax: '12',
-                            yMin: 0.5,
-                            yMax: 1,
+                            yMin: 0,
+                            yMax: 0.5,
                             backgroundColor: 'rgba(8,250,10,0.5)'
                         },
                             {
@@ -96,10 +67,10 @@
                                 id: 'region-2',
                                 xScaleID: 'x-axis-0',
                                 yScaleID: 'y-axis-0',
-                                xMin: '1',
+                                xMin: '0',
                                 xMax: '12',
-                                yMin: 1,
-                                yMax: 1.5,
+                                yMin: 0.5,
+                                yMax: 1,
                                 backgroundColor: 'rgba(148,250,127,0.5)',
                             }]
                     },

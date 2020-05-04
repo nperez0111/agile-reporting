@@ -1,0 +1,53 @@
+{
+	"numberOfDataPoints": 23,
+	"dataPoints": [
+		{
+			"value": 0.4,
+			"label": "JAN 7"
+		},
+		{
+			"value": 0.2,
+			"label": "JAN 9"
+		},
+		{
+			"value": 0.3,
+			"label": "JAN 3"
+		},
+		{
+			"value": 0.3,
+			"label": "FEB 8"
+		},
+		{
+			"value": 0.9,
+			"label": "JAN 8"
+		},
+		{
+			"value": 0.7,
+			"label": "JAN 7"
+		},
+		{
+			"value": 0.3,
+			"label": "JAN 7"
+		},
+		{
+			"value": 0.7,
+			"label": "JAN 3"
+		},
+		{
+			"value": 0.3,
+			"label": "FEB 7"
+		},
+		{
+			"value": 0.3,
+			"label": "FEB 2"
+		},
+		{
+			"value": 0.3,
+			"label": "JAN 8"
+		},
+		{
+			"value": 0.3,
+			"label": "JAN 7"
+		}
+	]
+}
